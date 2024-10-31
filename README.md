@@ -2,6 +2,10 @@
 
 Run [OpenAI/Swarm](https://github.com/openai/swarm) in browser.
 
+> [!WARNING]
+
+> This project loads the API Key in the browser for personal use cases. Do not use it in production.
+
 ## Install
 
 ```bash
@@ -38,7 +42,3 @@ npm install
    Starting Swarm.js 🐝
    ```
 5. A browser prompt will ask for User input. Try typing `refund`.
-
-## API Key Security
-
-This project loads the API Key in the browser for personal use cases. Do not use it in production.
