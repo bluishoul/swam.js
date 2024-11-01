@@ -40,4 +40,4 @@ npm install
    ```
    Starting Swarm.js 🐝
    ```
-5. A browser prompt will ask for User input. Try typing `refund`.
+5. Chat using the input box, and try typing 'refund' to start.
