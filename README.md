@@ -3,7 +3,6 @@
 Run [OpenAI/Swarm](https://github.com/openai/swarm) in browser.
 
 > [!WARNING]
-
 > This project loads the API Key in the browser for personal use cases. Do not use it in production.
 
 ## Install
