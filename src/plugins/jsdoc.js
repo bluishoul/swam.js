@@ -2,6 +2,12 @@ import MagicString from "magic-string";
 import jsdoc from "jsdoc-api";
 import globrex from "globrex";
 
+/**
+ * Parse the jsdoc of functions, then add `func.__description__` and `func.__params__` to function.
+ *
+ * @param {string} glob
+ * @returns
+ */
 export default function jsdocMetaPlugin(glob = "*agents.js") {
   return {
     name: "vite-plugin-jsdoc-meta",
