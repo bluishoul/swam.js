@@ -9,7 +9,11 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "vite": "^5.4.10"
+    "globrex": "^0.1.2",
+    "jsdoc-api": "^9.3.3",
+    "magic-string": "^0.30.12",
+    "vite": "^5.4.10",
+    "vite-plugin-inspect": "^0.8.7"
   },
   "dependencies": {
     "openai": "^4.68.4"

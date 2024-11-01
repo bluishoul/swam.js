@@ -64,20 +64,6 @@ export default class Swarm {
     }
   }
 
-  getArgs(func) {
-    // Convert the function to a string
-    const funcStr = func.toString();
-
-    // Use a regular expression to capture the arguments
-    const args = funcStr
-      .match(/\(([^)]*)\)/)[1]
-      .split(",")
-      .map((arg) => arg.trim())
-      .filter((arg) => arg);
-
-    return args;
-  }
-
   async handleToolCalls(toolCalls, functions, contextVariables, debug) {
     const functionMap = Object.fromEntries(functions.map((f) => [f.name, f]));
     const partialResponse = new Response({
@@ -102,7 +88,7 @@ export default class Swarm {
       const args = JSON.parse(toolCall.function.arguments);
       debugPrint(debug, `Processing tool call: ${name} with arguments`, args);
 
-      if (this.getArgs(func).includes(CTX_VARS_NAME))
+      if (func.__params__.map(({ name }) => name).includes(CTX_VARS_NAME))
         args[CTX_VARS_NAME] = contextVariables;
       const rawResult = await func(args);
       const result = this.handleFunctionResult(rawResult, debug);

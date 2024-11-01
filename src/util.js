@@ -51,40 +51,57 @@ export function mergeChunk(finalResponse, delta) {
  * @returns {Object} - JSON representation of the function's signature.
  */
 export function functionToJson(func) {
-  const typeMap = {
-    string: "string",
-    number: "number",
-    boolean: "boolean",
-    object: "object",
-    undefined: "null",
-  };
-
-  let parameters = {};
-  let required = [];
-
-  const paramRegex = /\(([^)]+)\)/;
-  const paramString = func.toString().match(paramRegex)?.[1];
-
-  if (paramString) {
-    const params = paramString.split(",").map((p) => p.trim());
-    params.forEach((param) => {
-      const [name, type] = param.split("=");
-      const paramType = typeMap[typeof eval(type)] || "string";
-      parameters[name] = { type: paramType };
-      if (!type) required.push(name);
-    });
-  }
-
   return {
     type: "function",
-    function: {
-      name: func.name,
-      description: func.description || "",
-      parameters: {
-        type: "object",
-        properties: parameters,
-        required: required,
-      },
+    function: jsdocParamsToOpenAIFunction(
+      func.name,
+      func.__description__,
+      func.__params__
+    ),
+  };
+}
+
+/**
+ * Converts JSDoc parameter metadata into OpenAI function call schema format.
+ * @param {string} functionName - The name of the function.
+ * @param {string} functionDescription - The description of the function.
+ * @param {Array} jsdocParams - The JSDoc parameters array.
+ * @returns {Object} - An OpenAI function call schema.
+ */
+function jsdocParamsToOpenAIFunction(
+  functionName,
+  functionDescription,
+  jsdocParams
+) {
+  const openAISchema = {
+    name: functionName,
+    description: functionDescription,
+    parameters: {
+      type: "object",
+      properties: {},
+      required: [],
     },
   };
+
+  jsdocParams.forEach((param) => {
+    const paramName = param.name;
+    const paramType = param.type.names[0];
+    const paramDescription = param.description;
+
+    openAISchema.parameters.properties[paramName] = {
+      type: paramType,
+      description: paramDescription,
+    };
+
+    if (!param.optional) {
+      openAISchema.parameters.required.push(paramName);
+    }
+
+    if (param.defaultvalue) {
+      openAISchema.parameters.properties[paramName].default =
+        param.defaultvalue;
+    }
+  });
+
+  return openAISchema;
 }

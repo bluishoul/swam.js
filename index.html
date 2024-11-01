@@ -4,9 +4,29 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Swarm.js</title>
+    <link rel="stylesheet" href="public/style.css" />
   </head>
   <body>
-    <div id="app"></div>
+    <div
+      id="app"
+      style="
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: 100%;
+      "
+    >
+      <h1>Swarm.js</h1>
+      <ul id="conversations"></ul>
+      <input
+        id="userInput"
+        type="text"
+        placeholder="Try send 'refund'"
+        value="refund"
+        onsubmit="onSubmit"
+      />
+    </div>
     <script type="module" src="/main.js"></script>
   </body>
 </html>
