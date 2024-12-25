@@ -26,6 +26,7 @@ const triageAgent = new Agent({
   model: import.meta.env?.["VITE_DEFAULT_MODEL"] || "gpt-4o",
   instructions:
     "Determine which agent is best suited to handle the user's request, and transfer the conversation to that agent.",
+  tool_choice: { type: "function", function: { name: "transferToRefunds" } },
 });
 
 const salesAgent = new Agent({

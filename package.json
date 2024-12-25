@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "main": "src/swarm.js",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -17,5 +18,10 @@
   },
   "dependencies": {
     "openai": "^4.68.4"
+  },
+  "exports": {
+    ".": "./src/swarm.js",
+    "./types": "./src/types.js",
+    "./vite-plugin-jsdoc-meta": "./src/plugins/jsdoc.js"
   }
 }

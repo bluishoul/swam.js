@@ -15,6 +15,7 @@ export default function jsdocMetaPlugin(glob = "*agents.js") {
       const result = globrex(glob);
       if (!result.regex.test(id)) return;
 
+      console.log('jsdocMetaPlugin', id)
       const data = await jsdoc.explain({ source: code });
       const functions = data.filter(({ kind }) => kind === "function");
       const s = new MagicString(code);

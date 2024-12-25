@@ -1,6 +1,7 @@
 import Swarm from "./src/swarm.js";
 import OpenAI from "openai";
 import { triageAgent } from "./src/agents.js";
+import "./src/ui/chat";
 
 const openai_client = new OpenAI({
   dangerouslyAllowBrowser: true,
@@ -52,3 +53,5 @@ document.querySelector("#userInput").addEventListener("keyup", async (e) => {
     answering = false;
   }
 });
+
+const chat = document.querySelector("#chat");
